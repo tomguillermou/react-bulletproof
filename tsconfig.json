@@ -5,6 +5,12 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
+    /* Custom paths */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "isolatedModules": true,

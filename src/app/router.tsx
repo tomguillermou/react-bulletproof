@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 
-import { Layout } from '../components/layout'
+import { Layout } from '@/components/layout'
+
 import { HomePage } from './routes/home'
 import { LoginPage } from './routes/login'
 import { TodosPage } from './routes/todos'

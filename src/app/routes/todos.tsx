@@ -1,4 +1,4 @@
-import { TodoList } from '../../features/todos/components/todo-list'
+import { TodoList } from '@/features/todos/components/todo-list'
 
 export function TodosPage() {
   return (
