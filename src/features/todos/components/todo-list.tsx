@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 
 import { useQuery } from '@tanstack/react-query'
 
@@ -10,7 +10,7 @@ export function TodoList() {
 
   const search = searchParams.get('search')?.toString()
 
-  const { data, error, isPending } = useQuery({
+  const { data, isError, isPending, refetch } = useQuery({
     queryKey: ['todos', search],
     queryFn: () => fetchTodos(search),
   })
@@ -19,8 +19,8 @@ export function TodoList() {
     return <div>Loading...</div>
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>
+  if (isError) {
+    return <button onClick={() => refetch()}>Reload</button>
   }
 
   return (
@@ -28,7 +28,9 @@ export function TodoList() {
       <SearchBar />
 
       {data.map((todo) => (
-        <li key={todo.id}>{todo.title}</li>
+        <li key={todo.id}>
+          <Link to={`/todos/${todo.id}`}>{todo.title}</Link>
+        </li>
       ))}
     </ul>
   )
