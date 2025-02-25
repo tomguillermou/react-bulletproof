@@ -1,31 +1,27 @@
-import { ChangeEvent } from 'react'
 import { useSearchParams } from 'react-router'
 import { useDebouncedCallback } from 'use-debounce'
 
 export function SearchBar() {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const debounceTimeInMs = 300
+  const searchDebounceTimeInMs = 300
 
-  const onSearch = useDebouncedCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const params = new URLSearchParams()
-      const search = event.target.value
+  const onSearch = useDebouncedCallback((search: string) => {
+    const params = new URLSearchParams()
 
-      if (search) {
-        params.set('search', search)
-      }
-      setSearchParams(params)
-    },
-    debounceTimeInMs
-  )
+    if (search.length) {
+      params.set('search', search)
+    }
+
+    setSearchParams(params)
+  }, searchDebounceTimeInMs)
 
   return (
     <input
       type="search"
       className="rounded border"
       placeholder="Search..."
-      onChange={onSearch}
+      onChange={(e) => onSearch(e.target.value)}
       defaultValue={searchParams.get('search')?.toString()}
     />
   )
